@@ -1,5 +1,8 @@
 class ShortenedUrl < ActiveRecord::Base
-   validates :shortened_url, :presence => true, :uniqueness => true
+   validates :shortened_url, :presence => true,
+   :uniqueness => true, length: { maximum: 1000 }
+
+   validate :is_spammer?
 
    belongs_to :submitter,
    class_name: "User",
@@ -45,11 +48,20 @@ class ShortenedUrl < ActiveRecord::Base
 
    def num_recent_uniques
      self.visits.select("visitor_id").
-     where("visits.updated_at <= ?", 10.minutes.ago).
+     where("visits.updated_at >= ?", 10.minutes.ago).
      distinct.count
    end
 
    def num_of_tags
      self.tags.count
+   end
+
+   def is_spammer?
+
+     if (self.submitter.submitted_urls.
+     where("shortened_urls.created_at > ?",
+     10.minutes.ago).count > 5)
+     errors[:base] << "stop spammer!, stop!"
+     end
    end
 end
