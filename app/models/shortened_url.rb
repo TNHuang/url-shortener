@@ -14,6 +14,13 @@ class ShortenedUrl < ActiveRecord::Base
    has_many :visitors, Proc.new { distinct },
            through: :visits, source: :visitor
 
+   has_many :taggings,
+   class_name: "Tagging",
+   foreign_key: :url_id,
+   primary_key: :id
+
+   has_many :tags, through: :taggings, source: :tag_topic
+
    def self.random_code
      new_url = SecureRandom::urlsafe_base64(16)
      while self.exists?(:shortened_url => new_url)
@@ -42,4 +49,7 @@ class ShortenedUrl < ActiveRecord::Base
      distinct.count
    end
 
+   def num_of_tags
+     self.tags.count
+   end
 end
