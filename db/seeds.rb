@@ -6,10 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
+
 john = User.create!( {:email => "blaghblagh@Zmail.com"})
 kenny = User.create!( {:email => "blaghblagh@Zahoo.com"})
 sam = User.create!( {:email => "blaghblagh@Zotmail.com"})
-
 
 ShortenedUrl::create_for_user_and_long_url!( john, "safsaffdsfadfaf")
 ShortenedUrl::create_for_user_and_long_url!( john, "11111")
@@ -31,3 +32,4 @@ Visit.create!(visitor_id: john.id, url_id: to_be_visited.id)
 Visit.create!(visitor_id: john.id, url_id: to_be_visited.id)
 Visit.create!(visitor_id: kenny.id, url_id: to_be_visited.id)
 Visit.create!(visitor_id: kenny.id, url_id: to_be_visited.id)
+
