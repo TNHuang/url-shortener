@@ -25,4 +25,9 @@ ShortenedUrl::create_for_user_and_long_url!( kenny, "saewrffdsfadfaf")
 ShortenedUrl::create_for_user_and_long_url!( kenny, "safsersfadfaf")
 ShortenedUrl::create_for_user_and_long_url!( kenny, "safsawersfadfaf")
 
-ShortenedUrl::create_for_user_and_long_url!( sam, "xxxxxxx")
+to_be_visited = ShortenedUrl::create_for_user_and_long_url!( sam, "xxxxxxx")
+
+Visit.create!(visitor_id: john.id, url_id: to_be_visited.id)
+Visit.create!(visitor_id: john.id, url_id: to_be_visited.id)
+Visit.create!(visitor_id: kenny.id, url_id: to_be_visited.id)
+Visit.create!(visitor_id: kenny.id, url_id: to_be_visited.id)
